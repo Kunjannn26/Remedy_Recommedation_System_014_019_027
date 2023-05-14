@@ -1,0 +1,77 @@
+{% extends "basic.html" %}
+{% load static %}
+
+ 
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'patient/checkdisease/dps.css' %}">   
+ 
+    <style>
+      form {
+          margin: 20px;
+          padding: 20px;
+          background-color: #f0f0f0;
+          border-radius: 10px;
+          box-shadow: 0px 0px 10px #888888;
+      }
+      p{
+          font-size: 21px;
+      }
+      label {
+          font-weight: bold;
+          margin-right: 10px;
+      }
+      select {
+          padding: 5px;
+          border-radius: 5px;
+          border: 1px solid #888888;
+      }
+      input[type="submit"] {
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+      ul {
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+      }
+      </style>
+    
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+{% block body %}
+
+<h1>Predict Allopathic Remedies</h1>
+<form method="POST">
+    {% csrf_token %}
+    <p> Please enter symptoms from the following:<br>
+      Headache,Fever,Cough,Sore Throat,Fatigue,Muscle Aches,Runny Nose,Sneezing,Nausea,Vomiting    </p>
+        <label for="symptoms">Enter Symptoms (separated by comma):</label>
+    <input type="text" id="symptoms" name="symptoms">  <br>  
+    {% if request.POST and not request.POST.symptoms %}
+        <p style="color: red;">Please enter at least one symptom.</p>
+    {% endif %}
+    <input type="submit" value="Predict">
+</form>
+{% endblock %}
+

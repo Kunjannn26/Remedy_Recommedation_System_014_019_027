@@ -1,0 +1,124 @@
+{% extends "basic.html" %}
+{% load static %}
+
+ 
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'patient/checkdisease/dps.css' %}">   
+ 
+    <style>
+      form {
+          margin: 20px;
+          padding: 20px;
+          background-color: #f0f0f0;
+          border-radius: 10px;
+          box-shadow: 0px 0px 10px #888888;
+      }
+      label {
+          font-weight: bold;
+          margin-right: 10px;
+      }
+      select {
+          padding: 5px;
+          border-radius: 5px;
+          border: 1px solid #888888;
+      }
+      input[type="submit"] {
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+      ul {
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+      }
+      p{
+          font-size: 21px;
+      }
+      .row{
+          padding: 20px;
+      }
+      </style>
+    
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% block body %}
+
+
+<h1>Predict Ayurvedic Remedies</h1>
+<form method="POST">
+    {% csrf_token %}
+    <p> Please enter symtoms from the following:<br>
+        Stress,Anxiety,Depression,Insomnia,Fatigue,Constipation,Indigestion/Digestive Issues,Bloating,Gas,Acid Reflux,Inflammation,Joint Pain,Arthritis,Skin Conditions,Nausea,Vomiting,Menstrual Cramps,Headaches,Acne,Skin Infections,Dandruff,Lice,Oral Health Issues,Memory Loss,Cognitive Function,Cough,Sore Throat,Bronchitis,Respiratory Infections,Immune System Support,Blood Sugar Regulation,Hormonal Imbalances,Fertility Issues,Bad Breath,Muscle Pain,High Blood Pressure,High Cholesterol,Sinus Congestion,Weight Loss,Cold,Fever,Skin Health
+    </p>
+        <label for="symptoms">Enter Symptoms (separated by comma):</label>
+    <input type="text" id="symptoms" name="symptoms">
+    {% comment %} <select name="symptoms">
+        <option value="Stress">Stress</option>
+        <option value="Anxiety">Anxiety</option>
+        <option value="Depression">Depression</option>
+        <option value="Insomnia">Insomnia</option>
+        <option value="Fatigue">Fatigue</option>
+        <option value="Constipation">Constipation</option>
+        <option value="Indigestion/Digestive Issues">Indigestion/Digestive Issues</option>
+        <option value="Bloating">Bloating</option>
+        <option value="Gas">Gas</option>
+        <option value="Acid Reflux">Acid Reflux</option>
+        <option value="Inflammation">Inflammation</option>
+        <option value="Joint Pain">Joint Pain</option>
+        <option value="Arthritis">Arthritis</option>
+        <option value="Skin Conditions">Skin Conditions</option>
+        <option value="Nausea">Nausea</option>
+        <option value="Vomiting">Vomiting</option>
+        <option value="Menstrual Cramps">Menstrual Cramps</option>
+        <option value="Headaches">Headaches</option>
+        <option value="Acne">Acne</option>
+        <option value="Skin Infections">Skin Infections</option>
+        <option value="Dandruff">Dandruff</option>
+        <option value="Lice">Lice</option>
+        <option value="Oral Health Issues">Oral Health Issues</option>
+        <option value="Memory Loss">Memory Loss</option>
+        <option value="Cognitive Function">Cognitive Function</option>
+        <option value="Cough">Cough</option>
+        <option value="Sore Throat">Sore Throat</option>
+        <option value="Bronchitis">Bronchitis</option>
+        <option value="Respiratory Infections">Respiratory Infections</option>
+        <option value="Immune System Support">Immune System Support</option>
+        <option value="Blood Sugar Regulation">Blood Sugar Regulation</option>
+        <option value="Hormonal Imbalances">Hormonal Imbalances</option>
+        <option value="Fertility Issues">Fertility Issues</option>
+        <option value="Bad Breath">Bad Breath</option>
+        <option value="Muscle Pain">Muscle Pain</option>
+        <option value="High Blood Pressure">High Blood Pressure</option>
+        <option value="High Cholesterol">High Cholesterol</option>
+        <option value="Sinus Congestion">Sinus Congestion</option>
+        <option value="Weight Loss">Weight Loss</option>
+        <option value="Cold">Cold</option>
+        <option value="Fever">Fever</option>
+        <option value="Skin Health">Skin Health</option>
+      </select>
+       {% endcomment %}
+       {% if request.POST and not request.POST.symptoms %}
+        <p style="color: red;">Please enter at least one symptom.</p>
+    {% endif %}
+    <input type="submit" value="Predict">
+  
+{% endblock %}

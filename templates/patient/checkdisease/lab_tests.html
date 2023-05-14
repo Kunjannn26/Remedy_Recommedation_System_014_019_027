@@ -1,0 +1,166 @@
+{% extends "basic.html" %}
+{% load static %}
+
+ 
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'patient/checkdisease/dps.css' %}">   
+ 
+    {% comment %} <title>Lab Report Tests for Diabetes and High Blood Pressure</title> {% endcomment %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ccc;
+            font-weight: normal;
+            font-size: 16px;
+        }
+
+        table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            vertical-align: top;
+        }
+
+    </style>
+    
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% block body %}
+
+<div class="container">
+    <h1>Lab Report Tests </h1>
+
+    <h2>Diabetes</h2>
+    {% comment %} <p>If you have been diagnosed with diabetes, your doctor may order the following lab report tests:</p> {% endcomment %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Test Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Fasting blood glucose test</td>
+                <td>Measures your blood glucose level after you have fasted for at least eight hours</td>
+            </tr>
+            <tr>
+                <td>Random blood glucose test</td>
+                <td>Measures your blood glucose level at any time of the day, regardless of when you last ate</td>
+            </tr>
+            <tr>
+                <td>Oral glucose tolerance test</td>
+                <td>Measures your blood glucose level before and two hours after you drink a sugary drink</td>
+            </tr>
+            <tr>
+                <td>Hemoglobin A1C test</td>
+                <td>Measures your average blood glucose level over the past two to three months</td>
+            </tr>
+            <tr>
+                <td>Lipid profile</td>
+                <td>Measures your cholesterol and triglyceride levels</td>
+            </tr>
+            <tr>
+                <td>Kidney function tests</td>
+                <td>Measures your kidney function, which can be affected by diabetes</td>
+            </tr>
+        </table>
+            <h2>High Blood Pressure</h2>
+            {% comment %} <p>If you have been diagnosed with diabetes, your doctor may order the following lab report tests:</p> {% endcomment %}
+        
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Blood Pressure Test</td>
+                        <td> Measures the force of blood against the walls of the arteries. A reading of 130/80 mm Hg or higher indicates high blood pressure.</td>
+                    </tr>
+                    <tr>
+                        <td>Urine Test</td>
+                        <td>Checks for protein in the urine, which can be a sign of kidney damage from high blood pressure.</td>
+                    </tr>
+                </table>
+                  
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

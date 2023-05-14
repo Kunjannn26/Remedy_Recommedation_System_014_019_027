@@ -1,0 +1,250 @@
+def allopathy(request):
+ MODEL_FILEPATH = os.path.join(settings.BASE_DIR, 'allopathic_model.joblib')
+
+# Load the model file
+  model = jb.load(MODEL_FILEPATH)
+  diseaselist=['Paracetamol','Ibuprofen','Aspirin','Diphenhydramine','Naproxen','Cetirizine','Ranitidine','Montelukast ',
+  'Fluticasone','Omeprazole','Esomeprazole']
+
+ 
+  symptomslist=['Headache','Fever','Cough','Sore_Throat','Fatigue','Muscle_Aches','Runny_Nose','Sneezing','Nausea','Vomiting',]
+
+# Define the symptoms list
+  data = pd.read_csv(os.path.join(settings.BASE_DIR, '/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/disease_prediction/model/allopathuc/Allopathic_Dataset.csv'))
+  symptoms_list = [symptom.lower().replace(' ', '') for symptom in data.columns.tolist() if symptom != 'Medicines']
+  if request.method == 'POST':
+        # Get the input symptoms from the form
+        symptoms = request.POST.getlist('symptoms')
+        
+        # Preprocess the input symptoms into a list of 0s and 1s
+        new_symptoms = [1 if symptom.strip().lower().replace(" ", "") in symptoms else 0 for symptom in symptoms_list]
+        
+        # Predict the probabilities of each class using the `predict_proba()` method
+        predicted_probabilities = model.predict_proba([new_symptoms])[0]
+        label_encoder = LabelEncoder()
+        label_encoder.fit(data['Medicines'])
+        # Sort the probabilities in descending order and get the top 3 predictions
+        top_3_predictions = label_encoder.inverse_transform(predicted_probabilities.argsort()[::-1][:3])
+        
+        # Render the results in the template
+        
+        return render(request, 'patient/allopathy/result.html', {'symptoms': symptoms, 'predictions': top_3_predictions})
+  else:
+     return render(request, 'patient/allopathy/allopathy.html', {'symptoms_list': symptoms_list})
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+{% extends "basic.html" %}
+{% load static %}
+
+ 
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'patient/checkdisease/dps.css' %}">   
+ 
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% block body %}
+
+<form action="{% url 'allopathy' %}" method="POST">
+  {% csrf_token %}
+   {% comment %} <label for="symptoms">Select Symptoms:</label><br> {% endcomment %}
+  {% comment %} <input type="text" id="symptoms" name="symptoms"><br> {% endcomment %}
+  {% comment %} <input type="submit" value="Submit">  {% endcomment %}
+   <label for="symptom1">Symptom 1:</label>
+  <select name="symptom1" id="symptom1">
+    <option value="Headache">Headache</option>
+    <option value="Fever">Fever</option>
+    <option value="Cough">Cough</option>
+    <option value="Sore_Throat">Sore Throat</option>
+    <option value="Fatigue">Fatigue</option>
+    <option value="Muscle_Aches">Muscle Aches</option>
+    <option value="Runny_Nose">Runny Nose</option>
+    <option value="Sneezing">Sneezing</option>
+    <option value="Nausea">Nausea</option>
+    <option value="Vomiting">Vomiting</option>
+  </select>
+  <br><br>
+  <label for="symptom2">Symptom 2:</label>
+  <select name="symptom2" id="symptom2">
+    <option value="Headache">Headache</option>
+    <option value="Fever">Fever</option>
+    <option value="Cough">Cough</option>
+    <option value="Sore_Throat">Sore Throat</option>
+    <option value="Fatigue">Fatigue</option>
+    <option value="Muscle_Aches">Muscle Aches</option>
+    <option value="Runny_Nose">Runny Nose</option>
+    <option value="Sneezing">Sneezing</option>
+    <option value="Nausea">Nausea</option>
+    <option value="Vomiting">Vomiting</option>
+  </select>
+  <br><br>
+  <label for="symptom3">Symptom 3:</label>
+  <select name="symptom3" id="symptom3">
+    <option value="Headache">Headache</option>
+    <option value="Fever">Fever</option>
+    <option value="Cough">Cough</option>
+    <option value="Sore_Throat">Sore Throat</option>
+    <option value="Fatigue">Fatigue</option>
+    <option value="Muscle_Aches">Muscle Aches</option>
+    <option value="Runny_Nose">Runny Nose</option>
+    <option value="Sneezing">Sneezing</option>
+    <option value="Nausea">Nausea</option>
+    <option value="Vomiting">Vomiting</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+	{% if predictions %}
+		<h2>Predictions:</h2>
+		<ul>
+			{% for prediction in predictions %}
+				<li>{{ prediction }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+</form>
+{% endblock %} 
+---------------------------------------------------
+{% comment %} {% extends "basic.html" %}
+{% load static %}
+
+ 
+    {% block head %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'patient/checkdisease/dps.css' %}">   
+ 
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% block body %}
+<style>
+  form {
+      margin: 20px;
+      padding: 20px;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px #888888;
+  }
+  label {
+      font-weight: bold;
+      margin-right: 10px;
+  }
+  select {
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #888888;
+  }
+  input[type="submit"] {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+  }
+  </style>
+
+<form action="{% url 'allopathy' %}" method="POST">
+  {% csrf_token %}
+   {% comment %} <label for="symptoms">Select Symptoms:</label><br> {% endcomment %}
+  {% comment %} <input type="text" id="symptoms" name="symptoms"><br> {% endcomment %}
+  {% comment %} <input type="submit" value="Submit">  {% endcomment %}
+  <label for="symptom1">Symptom 1:</label>
+  <select name="symptom1" id="symptom1">
+    <option value="Headache">Headache</option>
+    <option value="Fever">Fever</option>
+    <option value="Cough">Cough</option>
+    <option value="Sore_Throat">Sore Throat</option>
+    <option value="Fatigue">Fatigue</option>
+    <option value="Muscle_Aches">Muscle Aches</option>
+    <option value="Runny_Nose">Runny Nose</option>
+    <option value="Sneezing">Sneezing</option>
+    <option value="Nausea">Nausea</option>
+    <option value="Vomiting">Vomiting</option>
+  </select>
+  <br><br>
+  <label for="symptom2">Symptom 2:</label>
+  <select name="symptom2" id="symptom2">
+    <option value="Headache">Headache</option>
+    <option value="Fever">Fever</option>
+    <option value="Cough">Cough</option>
+    <option value="Sore_Throat">Sore Throat</option>
+    <option value="Fatigue">Fatigue</option>
+    <option value="Muscle_Aches">Muscle Aches</option>
+    <option value="Runny_Nose">Runny Nose</option>
+    <option value="Sneezing">Sneezing</option>
+    <option value="Nausea">Nausea</option>
+    <option value="Vomiting">Vomiting</option>
+  </select>
+  <br><br>
+  <label for="symptom3">Symptom 3:</label>
+  <select name="symptom3" id="symptom3">
+    <option value="Headache">Headache</option>
+    <option value="Fever">Fever</option>
+    <option value="Cough">Cough</option>
+    <option value="Sore_Throat">Sore Throat</option>
+    <option value="Fatigue">Fatigue</option>
+    <option value="Muscle_Aches">Muscle Aches</option>
+    <option value="Runny_Nose">Runny Nose</option>
+    <option value="Sneezing">Sneezing</option>
+    <option value="Nausea">Nausea</option>
+    <option value="Vomiting">Vomiting</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+	{% if predictions %}
+		<h2>Predictions:</h2>
+		<ul>
+			{% for prediction in predictions %}
+				<li>{{ prediction }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+</form>
+{% endblock %}  {% endcomment %}
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Predict Medicines</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Predict</button>
+  </form>
+{% endblock %}

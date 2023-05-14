@@ -1,0 +1,246 @@
+
+                
+                
+				{% extends "basic.html" %}
+				{% load static %}
+				
+				 
+					{% block head %}
+				
+					<link rel="stylesheet" type="text/css" href="{% static 'patient/checkdisease/dps.css' %}">  
+					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">				 
+					<title>Home Remedies</title>
+					<style>
+						body {
+							font-family: Arial, sans-serif;
+						}
+						
+						h1 {
+							text-align: center;
+							margin-top: 50px;
+						}
+						
+						.container {
+							display: flex;
+							flex-wrap: wrap;
+							justify-content: center;
+							margin-top: 50px;
+						}
+						
+						.card {
+							border: 1px solid #ccc;
+							border-radius: 5px;
+							margin: 20px;
+							width: 300px;
+							height: 400px;
+							box-shadow: 0 0 5px rgba(0,0,0,0.2);
+							transition: all 0.3s ease;
+							display: flex;
+							flex-direction: column;
+							justify-content: space-between;
+							padding: 20px;
+							box-sizing: border-box;
+						}
+						
+						.card:hover {
+							box-shadow: 0 0 10px rgba(0,0,0,0.3);
+							transform: translateY(-5px);
+						}
+						
+						.card h2 {
+							font-size: 24px;
+							margin-bottom: 10px;
+						}
+						
+						.card p {
+							font-size: 16px;
+							line-height: 1.5;
+							margin-bottom: 20px;
+						}
+						
+						.card button {
+							background-color: #7B68EE;
+							border: none;
+							color: white;
+							padding: 10px;
+							text-align: center;
+							text-decoration: none;
+							display: inline-block;
+							font-size: 16px;
+							border-radius: 5px;
+							cursor: pointer;
+							transition: background-color 0.3s ease;
+						}
+						
+						.card button:hover {
+							background-color: #483D8B;
+						}
+						.search-container {
+							display: flex;
+							justify-content: center;
+							margin-bottom: 30px;
+						}
+					
+						.search-container form {
+							display: flex;
+							flex-wrap: nowrap;
+							align-items: center;
+							background-color: #f2f2f2;
+							padding: 10px;
+							border-radius: 5px;
+							width: 50%;
+						}
+					
+						.search-container input[type="text"] {
+							flex-grow: 1;
+							border: none;
+							padding: 10px;
+							font-size: 17px;
+							font-family: Arial, sans-serif;
+						}
+					
+						.search-container button {
+							background-color: #36454F;
+							border: none;
+							color: white;
+							padding: 10px 15px;
+							text-align: center;
+							text-decoration: none;
+							display: inline-block;
+							font-size: 16px;
+							border-radius: 5px;
+							cursor: pointer;
+							transition: background-color 0.3s ease;
+						}
+					
+						.search-container button:hover {
+							{% comment %} background-color: #3e8e41; {% endcomment %}
+						}
+						  
+					</style>
+				
+				
+				{% endblock %}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				{% block body %}
+				
+				<div class="search-container">
+					<form>
+						<input type="text" placeholder="Search..." name="search">
+						<button type="submit"><i class="fa fa-search"></i></button>
+					</form>
+				</div>
+				<h1>Home Remedies for Common Diseases</h1>
+				<div class="container">
+					<div class="card">
+	<h2>Diabetes</h2>
+	
+	<p>Eat a balanced diet that includes plenty of fresh fruits and vegetables.
+		Avoid sugary drinks and processed foods.
+		Get regular exercise.
+		Monitor your blood sugar levels regularly.</p>
+		<button onclick="window.open('https://www.google.com/search?q=diabetes+home+remedies')">Learn More</button>	
+
+	
+</div>
+<div class="card">
+	<h2>Cancer</h2>
+	
+	<p>Eat a balanced diet that includes plenty of fresh fruits and vegetables.
+		Avoid smoking and exposure to tobacco smoke.
+		Limit alcohol consumption.
+		Get regular exercise.</p>
+		<button onclick="window.open('https://www.google.com/search?q=cancer+home+remedies')">Learn More</button>	
+
+	
+</div>
+<div class="card">
+	<h2>Cardiovascular </h2>
+	
+	<p>Eat a balanced diet that includes plenty of fresh fruits and vegetables.
+		Limit saturated and trans fats in your diet.
+		Get regular exercise.
+		Avoid smoking and exposure to tobacco smoke.
+		Monitor your blood pressure and cholesterol levels regularly.</p>
+		<button onclick="window.open('https://www.google.com/search?q=Cardiovascular+home+remedies')">Learn More</button>	
+
+	
+</div>
+<div class="card">
+	<h2>Alzheimer</h2>
+	
+		<p>Eat a balanced diet that includes plenty of fresh fruits and vegetables.
+		Engage in regular mental stimulation, such as reading or puzzles.
+		Stay socially active.
+		Get regular exercise.</p>
+		<button onclick="window.open('https://www.google.com/search?q=Alzheimer+home+remedies')">Learn More</button>		
+
+	
+</div>
+</div>
+
+
+
+
+
+		 <h1>Home Remedies for Common Ailments</h1> 
+	<div class="container">
+		<div class="card">
+			<h2>Headache</h2>
+			<p>Drink plenty of water, apply a cold compress to your forehead, or try an over-the-counter pain reliever such as ibuprofen or acetaminophen.</p>
+<button onclick="window.open('https://www.google.com/search?q=headache+home+remedies')">Learn More</button>		</div>
+		<div class="card">
+			<h2>Fever</h2>
+			<p>Rest and drink plenty of fluids. You can also try over-the-counter fever reducers such as acetaminophen or ibuprofen.</p>
+<button onclick="window.open('https://www.google.com/search?q=fever+home+remedies')">Learn More</button>		</div>
+		<div class="card">
+			<h2>Cough</h2>
+			<p>Sip warm water, honey and lemon tea, or a mixture of honey and ginger juice. You can also try over-the-counter cough medicines.</p>
+<button onclick="window.open('https://www.google.com/search?q=cough+home+remedies')">Learn More</button>		</div>
+		<div class="card">
+			<h2>Sore Throat</h2>
+			<p>Gargle with warm salt water, drink plenty of fluids, or try over-the-counter throat lozenges or sprays.</p>
+<button onclick="window.open('https://www.google.com/search?q=sore+throat+home+remedies')">Learn More</button>		</div>
+		<div class="card">
+			<h2>Fatigue</h2>
+			<p>Get plenty of rest, eat a balanced diet, and
+                exercise regularly. Limit caffeine and alcohol intake, and try relaxation techniques such as meditation or yoga.</p>
+                <button onclick="window.open('https://www.google.com/search?q=fatigue+home+remedies')">Learn More</button>
+                </div>
+                <div class="card">
+                <h2>Muscle Aches</h2>
+                <p>Apply a warm compress to the affected area, take over-the-counter pain relievers such as ibuprofen or acetaminophen, or try a massage.</p>
+                <button onclick="window.open('https://www.google.com/search?q=muscle+aches+home+remedies')">Learn More</button>
+                </div>
+                <div class="card">
+                <h2>Runny Nose</h2>
+                <p>Stay hydrated, use a saline nasal spray or rinse, or try over-the-counter decongestants.</p>
+                <button onclick="window.open('https://www.google.com/search?q=runny+nose+home+remedies')">Learn More</button>
+                </div>
+                <div class="card">
+                <h2>Sneezing</h2>
+                <p>Avoid triggers such as pollen, dust, or pet dander, and take over-the-counter antihistamines or decongestants.</p>
+                <button onclick="window.open('https://www.google.com/search?q=sneezing+home+remedies')">Learn More</button>
+                </div>
+                <div class="card">
+                <h2>Nausea</h2>
+                <p>Eat small, frequent meals, avoid spicy or greasy foods, and try over-the-counter antacids or anti-nausea medications.</p>
+                <button onclick="window.open('https://www.google.com/search?q=nausea+home+remedies')">Learn More</button>
+                </div>
+                <div class="card">
+                <h2>Vomiting</h2>
+                <p>Drink clear liquids, eat bland foods such as crackers or toast, and try over-the-counter anti-nausea medications.</p>
+                <button onclick="window.open('https://www.google.com/search?q=Vomiting+home+remedies')">Learn More</button>
+                </div>
+                </div>
+                
+				{% endblock %}
+				
