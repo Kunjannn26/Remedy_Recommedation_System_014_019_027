@@ -10,61 +10,27 @@ from chats.models import Chat,Feedback
 from sklearn.impute import SimpleImputer
 
 from django.conf import settings
-import os
 import joblib as jb
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
-import numpy as np
-import pandas as pd
-import sklearn
-from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 
-from django.shortcuts import render
-
- #3 MODELS
-# def allopathy(request):
-#   # diseaselist=['Paracetamol','Ibuprofen','Aspirin','Diphenhydramine','Naproxen','Cetirizine','Ranitidine','Montelukast ',
-# #  'Fluticasone','Omeprazole','Esomeprazole']
-
-
-#   symptoms_list=['Headache','Fever','Cough','Sore_Throat','Fatigue','Muscle_Aches','Runny_Nose','Sneezing','Nausea','Vomiting',]
-
-#   if request.method == 'POST':
-#         # Get the input symptoms from the form
-#         symptoms = request.POST.get('symptoms')
-        
-#         # Preprocess the input symptoms into a list of 0s and 1s
-#         new_symptoms = [1 if symptom.strip() in symptoms.lower().replace(" ", "").split(',') else 0 for symptom in symptoms_list]
-        
-#         # Predict the probabilities of each class using the `predict_proba()` method
-#         predicted_probabilities = model.predict_proba([new_symptoms])[0]
-        
-#         # Sort the probabilities in descending order and get the top 3 predictions
-#         label_encoder = LabelEncoder()
-#         top_3_predictions = label_encoder.inverse_transform(predicted_probabilities.argsort()[::-1][:3])
-        
-#         # Render the results in the template
-#         return render(request, '/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/allopathy/result.html', {'symptoms': symptoms, 'predictions': top_3_predictions})
-#   else:
-#         return render(request, '/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/allopathy/allopathy.html')
-       
-
+ 
 def home_remedy(request):
-  return render(request,'/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/home_remedy/home_remedy.html')
+  return render(request,'/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027//templates/patient/home_remedy/home_remedy.html')
 
 def know(request):
-  return render(request,'/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/ayurvedic/know.html')
+  return render(request,'/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027//templates/patient/ayurvedic/know.html')
 def lab_tests(request):
-  return render(request,'/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/checkdisease/lab_tests.html')
+  return render(request,'/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027//templates/patient/checkdisease/lab_tests.html')
 def allopathy(request):
   
    # Load the data into a Pandas dataframe
-    data_2 = pd.read_csv("/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/disease_prediction/model/allopathuc/Allopathic_Dataset.csv")
+    data_2 = pd.read_csv("/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027/models/allopathuc/Allopathic_Dataset.csv")
     
     symptoms_list = [symptom.lower().replace(' ', '') for symptom in data_2.columns.tolist() if symptom != 'Medicines']
 
@@ -100,7 +66,7 @@ def allopathy(request):
         
         if not new:
           error_message = "Please enter some symptoms."
-          return render(request, '/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/allopathy/allopathy.html', {'error_message': error_message})
+          return render(request, '/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027//templates/patient/allopathy/allopathy.html', {'error_message': error_message})
 
         new = new.lower().replace(" ", "")
         new_symptoms = [1 if all(symptom.strip() in s for s in new.split(',')) else 0 for symptom in symptoms_list]
@@ -120,9 +86,9 @@ def allopathy(request):
                    'top_3_predictions_KNN': top_3_predictions_KNN}
 
 
-        return render(request, '/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/allopathy/result.html', context)
+        return render(request, '/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027//templates/patient/allopathy/result.html', context)
 
-    return render(request, 'C:/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/allopathy/allopathy.html')
+    return render(request, '/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027//templates/patient/allopathy/allopathy.html')
 
 
 
@@ -136,7 +102,7 @@ def allopathy(request):
 def ayurvedic(request):
   
     # Load the data into a Pandas dataframe
-    data_2 = pd.read_csv("/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/disease_prediction/model/ayurvedic/final_Ayurvedic_Dataset.csv")
+    data_2 = pd.read_csv("/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027/models/ayurvedic/final_Ayurvedic_Dataset.csv")
     
     symptoms_list = [symptom.lower().replace(' ', '') for symptom in data_2.columns.tolist() if symptom != 'Remedy']
 
@@ -172,7 +138,7 @@ def ayurvedic(request):
         new = request.POST.get('symptoms')
         if not new:
             error_message = "Please enter some symptoms."
-            return render(request, 'C:/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/ayurvedic/ayurvedic.html', {'error_message': error_message})
+            return render(request, '/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027/templates/patient/ayurvedic/ayurvedic.html', {'error_message': error_message})
 
         new = new.lower().replace(" ", "")
         new_symptoms = [1 if all(symptom.strip() in s for s in new.split(',')) else 0 for symptom in symptoms_list]
@@ -190,9 +156,9 @@ def ayurvedic(request):
         context = {'top_3_predictions_DT': top_3_predictions_DT,
                   'top_3_predictions_RF': top_3_predictions_RF,
                   'top_3_predictions_KNN': top_3_predictions_KNN}
-        return render(request, '/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/ayurvedic/result.html', context)
+        return render(request, '/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027/templates/patient/ayurvedic/result.html', context)
 
-    return render(request, 'C:/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/templates/patient/ayurvedic/ayurvedic.html')
+    return render(request, '/Users/Admin/Desktop/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027/templates/patient/ayurvedic/ayurvedic.html')
 
 
 #loading trained_model
@@ -291,7 +257,7 @@ def pviewprofile(request, patientusername):
 #   symptomslist=['Headache','Fever','Cough','Sore_Throat','Fatigue','Muscle_Aches','Runny_Nose','Sneezing','Nausea','Vomiting',]
 
 # # Define the symptoms list
-#   data = pd.read_csv(os.path.join(settings.BASE_DIR, '/Users/Admin/Desktop/kun/Disease-Prediction-using-Django-and-machine-learning-master/disease_prediction/model/allopathuc/Allopathic_Dataset.csv'))
+#   data = pd.read_csv(os.path.join(settings.BASE_DIR, '/Users/Admin/Desktop/kun/kun/mini_proj_remedy_recommendation/Remedy_Recommedation_System_014_019_027//disease_prediction/model/allopathuc/Allopathic_Dataset.csv'))
 #   symptoms_list = [symptom.lower().replace(' ', '') for symptom in data.columns.tolist() if symptom != 'Medicines']
 #   if request.method == 'POST':
 #         # Get the input symptoms from the form
